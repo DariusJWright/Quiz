@@ -1,26 +1,20 @@
 var seconds = 75;
+var questionEl = document.getElementById("question");
+    questionEl.className = "question";
+var start = document.querySelector("#start-button");
+var intro = document.querySelector("#intro");
+var startButtonDiv = document.querySelector("#start");
+var buttonContainer = document.querySelector("#button-container");
+var response = document.querySelector("#response");
+    response.className = "response";
 
-var correct = document.createElement("p");
-    correct.innerHTML = "<em>Correct!</em>"
-    correct.style.textAlign = "left";
-    correct.style.marginLeft = "100px";
-    correct.style.marginRight = "100px";
-    correct.style.marginTop = "10px";
-    correct.style.borderTop = "solid 2px black";
-    correct.style.paddingTop = "5px";
+var answers1 = ["Booleans", "Numbers", "Strings", "Alerts"];
+var answers2 = ["Quotes", "Curly brackets", "Parenthesis", "Square brackets"];
+var answers3 = ["Numbers & Strings", "Other arrays", "Booleans", "All of the above"];
+var answers4 = ["Commas", "Quotes", "Curly brackets", "Parenthesis"];
+var answers5 = ["JavaScript", "Terminal/Bash", "For loops", "console.log"];
 
-var wrong = document.createElement("p");
-    wrong.innerHTML = "<em>Wrong!</em>"
-    wrong.style.textAlign = "left";
-    wrong.style.marginLeft = "100px";
-    wrong.style.marginRight = "100px";
-    wrong.style.marginTop = "10px";
-    wrong.style.borderTop = "solid 2px black";
-    wrong.style.paddingTop = "5px";
-
-var answers = ["Booleans", "Numbers", "Strings", "Alerts"];
-
-var questions = ["Commonly used data types do not include:", "The condition in an if/else statement is enclosed with:", "Arrays in JavaScript can be used to store:"]
+var questions = ["Commonly used data types do not include:", "The condition in an if/else statement is enclosed with:", "Arrays in JavaScript can be used to store:", "String values must be enclosed within _________ when being assigned to variables", "A very modern tool used during development and debugging for printing content to the debugger is:"];
 
 
 
@@ -38,63 +32,176 @@ var timer = function() {
     
 }
 
-var intro = function(){
-    var question = document.getElementById("question");
-    question.textContent = "Coding Quiz Challenge";
-    
-    var instructions = document.createElement("p");
-    instructions.innerHTML = "Try to answer the following code-related questions within the time limit.<br>Keep in mind that incorrect answers will penalize your score/time<br>by ten seconds!";
-    instructions.style.fontSize = "20px";
-    instructions.style.marginTop = "20px";
-    question.appendChild(instructions);
-
-    var button = document.createElement("button");
-    button.id = "start-button";
-    button.textContent = "Start Quiz";
-    question.appendChild(button);
-
-    var start = document.querySelector("#start-button");
-    
-    start.addEventListener("click", timer);
-    start.addEventListener("click", quiz1);  
-}
-
 var quiz1 = function() {
-    var questionEl = document.getElementById("question");
-    questionEl.className = "question";
-    var answer = document.getElementById("button-container");
+    intro.textContent = "";
+    startButtonDiv.innerHTML = "";
+    questionEl.textContent = questions[0];
 
-    for (var i = 0; i < questions.length; i++) {
-        question = questions[i];
-        questionEl.textContent = question;
-    }
-
-    for (var i = 0; i < answers.length; i++) {
+    for (var i = 0; i < answers1.length; i++) {
         var choice = document.createElement("button");
         choice.className = "button";
         choice.id = "button" + [i];
-        choice.textContent = [i + 1] + ". " + answers[i];
-        answer.appendChild(choice);
+        choice.textContent = [i + 1] + ". " + answers1[i];
+        buttonContainer.appendChild(choice);
         console.log(choice);
     }
-    
-    var correctAnswerEl = document.querySelector("#button-container");
-    correctAnswerEl.addEventListener("click", console.log(choice));
-    
-    
+    buttonContainer.addEventListener("click", select1);
+}    
 
-    var select = function(event) {
-        var correctAnswer = event.target.getAttribute("id");
-        console.log(correctAnswer);
-        if (correctAnswer.matches("button3")) {
-            answer.appendChild(correct);
-            console.log(3);
-        }
-        else {
-            answer.appendChild(wrong);
-        }
+var select1 = function(event) {
+    var correctAnswer = event.target.getAttribute("id");
+    console.log(correctAnswer);
+    
+    if (correctAnswer === "button3") {
+        quiz2();
+        response.innerHTML = "<em>Correct!</em>";
+    }
+    else {
+        seconds -= 10;
+        quiz2();
+        response.innerHTML = "<em>Wrong!</em>";
     }
 }
 
+var quiz2 = function() {
+    intro.textContent = "";
+    startButtonDiv.innerHTML = "";
+    questionEl.textContent = questions[1];
+    buttonContainer.innerHTML = "";
+    
+    for (var i = 0; i < answers2.length; i++) {
+        var choice = document.createElement("button");
+        choice.className = "button";
+        choice.id = "button" + [i];
+        choice.textContent = [i + 1] + ". " + answers2[i];
+        buttonContainer.appendChild(choice);
+        console.log(choice);
+    }
+    buttonContainer.addEventListener("click", select2);
+}    
 
-intro();
+var select2 = function(event) {
+    var correctAnswer = event.target.getAttribute("id");
+    console.log(correctAnswer);
+    if (correctAnswer === "button2") {
+        quiz3();
+        response.innerHTML = "<em>Correct!</em>";
+    }
+    else {
+        seconds = seconds - 10;
+        quiz3();
+        response.innerHTML = "<em>Wrong!</em>";
+    }
+}
+
+var quiz3 = function() {
+    intro.textContent = "";
+    startButtonDiv.innerHTML = "";
+    questionEl.textContent = questions[2];
+    buttonContainer.innerHTML = "";
+    
+    for (var i = 0; i < answers3.length; i++) {
+        var choice = document.createElement("button");
+        choice.className = "button";
+        choice.id = "button" + [i];
+        choice.textContent = [i + 1] + ". " + answers3[i];
+        buttonContainer.appendChild(choice);
+        console.log(choice);
+    }
+    buttonContainer.addEventListener("click", select3);
+}    
+
+var select3 = function(event) {
+    var correctAnswer = event.target.getAttribute("id");
+    console.log(correctAnswer);
+    if (correctAnswer === "button3") {
+        response.innerHTML = "<em>Correct!</em>";
+        quiz4();
+    }
+    else {
+        seconds -= 10;
+        response.innerHTML = "<em>Wrong!</em>";
+        quiz4();
+    }
+}
+
+var quiz4 = function() {
+    intro.textContent = "";
+    startButtonDiv.innerHTML = "";
+    questionEl.textContent = questions[3];
+    buttonContainer.innerHTML = "";
+    
+    for (var i = 0; i < answers4.length; i++) {
+        var choice = document.createElement("button");
+        choice.className = "button";
+        choice.id = "button" + [i];
+        choice.textContent = [i + 1] + ". " + answers4[i];
+        buttonContainer.appendChild(choice);
+        console.log(choice);
+    }
+    buttonContainer.addEventListener("click", select4);
+}    
+
+var select4 = function(event) {
+    var correctAnswer = event.target.getAttribute("id");
+    console.log(correctAnswer);
+    if (correctAnswer === "button1") {
+        response.innerHTML = "<em>Correct!</em>";
+        quiz5();
+    }
+    else {
+        seconds -= 10;
+        response.innerHTML = "<em>Wrong!</em>";
+        quiz5();
+    }
+}
+
+var quiz5 = function() {
+    intro.textContent = "";
+    startButtonDiv.innerHTML = "";
+    questionEl.textContent = questions[4];
+    buttonContainer.innerHTML = "";
+    
+    for (var i = 0; i < answers5.length; i++) {
+        var choice = document.createElement("button");
+        choice.className = "button";
+        choice.id = "button" + [i];
+        choice.textContent = [i + 1] + ". " + answers5[i];
+        buttonContainer.appendChild(choice);
+        console.log(choice);
+    }
+    buttonContainer.addEventListener("click", select5);
+}    
+
+var select5 = function(event) {
+    var correctAnswer = event.target.getAttribute("id");
+    console.log(correctAnswer);
+    if (correctAnswer === "button3") {
+        response.innerHTML = "<em>Correct!</em>";
+        endQuiz();
+        
+    }
+    else {
+        seconds -= 10;
+        response.innerHTML = "<em>Wrong!</em>";
+        endQuiz();
+    }
+}
+
+var endTime = function() {
+    if (seconds === 0) {
+        endQuiz();
+    }
+}
+
+var endQuiz = function() {
+    questionEl.innerHTML = "All done!"
+    intro.innerHTML = "Your final score is " + seconds + ".";
+    start.innerHTML = "";
+    buttonContainer.innerHTML = "<p>Enter initials:</p><input></input><button>submit</button>";
+
+
+}
+
+start.addEventListener("click", timer);
+start.addEventListener("click", quiz1); 

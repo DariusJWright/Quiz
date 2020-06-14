@@ -76,3 +76,11 @@ main h1 {
     background-color: rebeccapurple;
 }
 
+.response {
+    text-align: "left";
+    margin-left: "100px";
+    margin-right: "100px";
+    margin-top: "10px";
+    border-top: "solid 2px black";
+    padding-top: "5px";
+}
