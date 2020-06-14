@@ -17,19 +17,20 @@ var answers5 = ["JavaScript", "Terminal/Bash", "For loops", "console.log"];
 var questions = ["Commonly used data types do not include:", "The condition in an if/else statement is enclosed with:", "Arrays in JavaScript can be used to store:", "String values must be enclosed within _________ when being assigned to variables", "A very modern tool used during development and debugging for printing content to the debugger is:"];
 
 
-
+var countdown = document.getElementById("timer");
 var timer = function() {
-    
     var timeLeft = setInterval(function() {
-        var countdown = document.getElementById("timer");
-        countdown.textContent = "Time: " + seconds;
         seconds--;
-        if (seconds === -1) {
+        
+        countdown.textContent = "Time: " + seconds;
+        if (seconds <= 0 || ) {
             countdown.textcontent = "";
             clearInterval(timeLeft);
+            endQuiz();
         }
     }, 1000);
     
+    quiz1();
 }
 
 var quiz1 = function() {
@@ -58,12 +59,15 @@ var select1 = function(event) {
     }
     else {
         seconds -= 10;
+        console.log(seconds, "select1 else");
         quiz2();
         response.innerHTML = "<em>Wrong!</em>";
     }
 }
 
 var quiz2 = function() {
+    buttonContainer.removeEventListener("click", select1);
+    console.log(seconds, "is in quiz2");
     intro.textContent = "";
     startButtonDiv.innerHTML = "";
     questionEl.textContent = questions[1];
@@ -95,6 +99,7 @@ var select2 = function(event) {
 }
 
 var quiz3 = function() {
+    buttonContainer.removeEventListener("click", select2);
     intro.textContent = "";
     startButtonDiv.innerHTML = "";
     questionEl.textContent = questions[2];
@@ -126,6 +131,7 @@ var select3 = function(event) {
 }
 
 var quiz4 = function() {
+    buttonContainer.removeEventListener("click", select3);
     intro.textContent = "";
     startButtonDiv.innerHTML = "";
     questionEl.textContent = questions[3];
@@ -157,6 +163,7 @@ var select4 = function(event) {
 }
 
 var quiz5 = function() {
+    buttonContainer.removeEventListener("click", select4);
     intro.textContent = "";
     startButtonDiv.innerHTML = "";
     questionEl.textContent = questions[4];
@@ -188,20 +195,13 @@ var select5 = function(event) {
     }
 }
 
-var endTime = function() {
-    if (seconds === 0) {
-        endQuiz();
-    }
-}
-
 var endQuiz = function() {
-    questionEl.innerHTML = "All done!"
-    intro.innerHTML = "Your final score is " + seconds + ".";
+    countdown.textContent = "Timer: 0";
+    questionEl.textContent = "All done!"
+    intro.textContent = "Your final score is " + seconds + ".";
     start.innerHTML = "";
-    buttonContainer.innerHTML = "<p>Enter initials:</p><input></input><button>submit</button>";
-
-
+    document.getElementById("button-container").remove();
+    response.innerHTML = "<p>Enter initials:</p><input></input><button>submit</button>";
 }
 
 start.addEventListener("click", timer);
-start.addEventListener("click", quiz1); 
