@@ -84,3 +84,22 @@ main h1 {
     border-top: "solid 2px black";
     padding-top: "5px";
 }
+
+.submit {
+    text-align: left;
+    background-color: rgb(68, 27, 78);
+    color: white;
+    font-size: 25px;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 5px 5px 5px 100px;
+    border: none;
+    outline: none;
+    width: 100px;
+    box-shadow: 3px 3px rebeccapurple;
+    height: 55px;
+}
+
+.input {
+    height: 25px;
+}
